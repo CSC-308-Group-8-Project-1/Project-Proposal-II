@@ -8,14 +8,14 @@
 import UIKit
 class ViewController: UIViewController
 {
-    let members = [("Eli Krouse", "Role:\nBackend, Admin, and Project proposal setter-upper\n\nResponsibilities:\nBuilding the Views in story board, writing the bulk of the code, making sure functionality works/crash checker.", UIImage(named: "qMark")),
-                   ("Cameron Schulte", "Role:\nUI Designer, Debugger, and UX Dev\n\nResponsibilities: Build and manipulate UI and layouts to make sure they look good on both Iphone and Ipad, as well as creating a cohesion between detail points and overall appearance. Helps with debugging", UIImage(named: "person.fill.questionmark"))]
+    let members = [("Eli Krouse", "Role:\nBackend, Admin, and Project proposal setter-upper\n\nResponsibilities:\nBuilding the Views in story board, writing the bulk of the code, making sure functionality works/crash checker.", UIImage(named: "EKPFP")),
+                   ("Cameron Schulte", "Role:\nUI Designer, Debugger, and UX Dev\n\nResponsibilities: Build and manipulate UI and layouts to make sure they look good on both Iphone and Ipad, as well as creating a cohesion between detail points and overall appearance. Helps with debugging", UIImage(named: "qMark"))]
     
     
     
     let games = [("Tic-Tac-Toe", UIImage(named: "tictactoe")), ("Dots and Boxes", UIImage(named:"dotsAndBoxes")), ("UNSURE", nil)]
     
-    let plans = ["User Experience (UX)", "User Interface (UI)"]
+    let plans = [("User Experience (UX)", "Our UX policy is to keep players from having to fiddle with any settings, besides color. We want the style to be as minimal as possible and to have clean, seamless transitions between views/games. To keep this, we will restrict users from choosing games and who is the in game player."), ("User Interface (UI)", "The User interface will consists of games, settings, and transition screens. Transition screens (wip) will be the beggining screen (with a simple \"start\" button) and (possibly) screens in between games to let the views load and announce the title of the game for player awarness. Mostly everything will be withing classic Apple constraints, with some exceptsion, like how the lines of Dots and Boxes will not have a corner radius of 12, to appear more \"line-like\". We will also aim to have a more aetheticly pleasing app overall, with soft gradients, etc")]
     
     override func viewDidLoad()
     {
@@ -54,7 +54,7 @@ extension ViewController: UITableViewDataSource
             cell.textLabel?.text = games[indexPath.row].0
             cell.imageView?.image = games[indexPath.row].1
         case 2:
-            cell.textLabel?.text = plans[indexPath.row]
+            cell.textLabel?.text = plans[indexPath.row].0
         default:
             break
         }
@@ -99,6 +99,7 @@ extension ViewController: UITableViewDelegate
                 self.navigationController?.pushViewController(detailVC, animated: true)}
         case 2:
             if let detailVC = storyboard.instantiateViewController(withIdentifier: "PlanView") as? PlanViewController{
+                detailVC.u = plans[indexPath.row]
                 self.navigationController?.pushViewController(detailVC, animated: true)}
         default:
             print("error in nav push")
